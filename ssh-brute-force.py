@@ -11,6 +11,7 @@ def ssh_connection(ip : str, username : str, password : str) -> bool:
     try:
         ssh.connect(ip, username=username, password=password)
         print("Connected to succesfully \nPaswword is {}".format(password))
+        ssh.close()
         return True
     except paramiko.AuthenticationException:
         print("Authentication failed, please verify your credentials")
